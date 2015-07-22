@@ -63,7 +63,7 @@ public class StubEmployeeRepositoryImpl implements EmployeeRepository {
 				employee.setID(rs.getInt("ID"));
 				employee.setFirstName(rs.getString("firstName"));
 				employee.setLastName(rs.getString("lastName"));
-				employee.setMiddleInitial(rs.getString("middleInitial"));
+				employee.setMiddleInitial(rs.getString("middleInit"));
 				employee.setLevel(rs.getString("level"));
 				employee.setWorkForce(rs.getString("workforce"));
 				employee.setEnterpriseID(rs.getString("enterpriseID"));
@@ -102,7 +102,7 @@ public class StubEmployeeRepositoryImpl implements EmployeeRepository {
 				employee.setID(rs.getInt("ID"));
 				employee.setFirstName(rs.getString("firstName"));
 				employee.setLastName(rs.getString("lastName"));
-				employee.setMiddleInitial(rs.getString("middleInitial"));
+				employee.setMiddleInitial(rs.getString("middleInit"));
 				employee.setLevel(rs.getString("level"));
 				employee.setWorkForce(rs.getString("workforce"));
 				employee.setEnterpriseID(rs.getString("enterpriseID"));
@@ -127,7 +127,7 @@ public class StubEmployeeRepositoryImpl implements EmployeeRepository {
 	public List<Employee> findEmployeesByProject(long projectID) {
 
 		List<Employee> list = new ArrayList<Employee>();
-		String statement = "Select a.ID, a.firstName, a.lastName, a.middleInitial, a.level, a.workforce, a.enterpriseID from employee a, employeeProjectDetail b where a.ID=b.employeeDetail_employee_ID and b.project_ID=?;";
+		String statement = "Select a.ID, a.firstName, a.lastName, a.middleInit, a.level, a.workforce, a.enterpriseID from employee a, employeeProjectDetail b where a.ID=b.employeeDetail_employee_ID and b.project_ID=?;";
 		System.out.println("statement");
 		Connection conn = null;
 		try {
@@ -145,7 +145,7 @@ public class StubEmployeeRepositoryImpl implements EmployeeRepository {
 				employee.setID(rs.getInt("ID"));
 				employee.setFirstName(rs.getString("firstName"));
 				employee.setLastName(rs.getString("lastName"));
-				employee.setMiddleInitial(rs.getString("middleInitial"));
+				employee.setMiddleInitial(rs.getString("middleInit"));
 				employee.setLevel(rs.getString("level"));
 				employee.setWorkForce(rs.getString("workforce"));
 				employee.setEnterpriseID(rs.getString("enterpriseID"));
