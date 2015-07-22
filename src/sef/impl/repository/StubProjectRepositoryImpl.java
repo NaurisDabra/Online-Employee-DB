@@ -117,6 +117,7 @@ public class StubProjectRepositoryImpl implements ProjectRepository {
 			ps.setLong(2, projectID);
 			ResultSet rs = ps.executeQuery();
 			getProjectRoleList(rs,list);
+			rs.close();
 			ps.close();
  
 		} catch (SQLException e) {
@@ -221,7 +222,7 @@ public class StubProjectRepositoryImpl implements ProjectRepository {
 			newrole.setEndDate(rs.getDate("endDate"));
 			list.add(newrole);								
 		}
-		rs.close();
+		
 		return list;
 	}
 
