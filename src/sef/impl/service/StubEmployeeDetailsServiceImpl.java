@@ -14,14 +14,22 @@ public class StubEmployeeDetailsServiceImpl implements EmployeeDetailsService{
 	//passed by the Spring framework so that other methods can access the objects.
 
 	private static Logger log = Logger.getLogger(StubEmployeeDetailsServiceImpl.class);
-
+	private EmployeeRepository empDAO;
+	private SkillRepository skillDAO;
+	ProjectRepository projectDAO;
 	public StubEmployeeDetailsServiceImpl(EmployeeRepository empDAO, ProjectRepository projectDAO, SkillRepository skillDAO){
+	this.empDAO=empDAO;
+	this.skillDAO=skillDAO;
+	this.projectDAO = projectDAO;
 	}
 
 	@Override
 	public EmployeeDetail getEmployeeDetails(long employeeID) {
 		
-		EmployeeDetail detail = new EmployeeDetail();		
+		EmployeeDetail detail = new EmployeeDetail();	
+		detail.setEmployee(empDAO.findEmployeeByID(employeeID));
+		detail.setProjectList(projectDAO.getEmployeeProjectHistory(employeeID));
+		detail.setSkillList(skillDAO.findEmployeeSkills(employeeID));
 		return detail;
 	}
 }

@@ -17,15 +17,19 @@ public class StubSearchServiceImpl implements SearchService {
 	//passed by the Spring framework so that other methods can access the objects.
 
 	private static Logger log = Logger.getLogger(StubSearchServiceImpl.class);
-
+	private EmployeeRepository empDAO;
+	private ProjectRepository projectDAO;
 	public StubSearchServiceImpl(EmployeeRepository empDAO,
 			ProjectRepository projectDAO) {
+		this.empDAO=empDAO;
+		this.projectDAO=projectDAO;
 	}
 
 	@Override
 	public List<Employee> findEmployeesByName(String firstName, String lastName) {
 
 		List<Employee> employeeList = new ArrayList<Employee>();
+		employeeList = empDAO.findEmployeesByName(firstName, lastName);
 		return employeeList;
 	}
 
@@ -33,6 +37,7 @@ public class StubSearchServiceImpl implements SearchService {
 	public List<Employee> findEmployeesByProject(long projectID) {
 		
 		List<Employee> employeeList = new ArrayList<Employee>();
+		employeeList = empDAO.findEmployeesByProject(projectID);
 		return employeeList;
 	}
 
@@ -40,6 +45,7 @@ public class StubSearchServiceImpl implements SearchService {
 	public List<Project> listAllProjects() {
 		
 		List<Project> projectList = new ArrayList<Project>();
+		projectList = projectDAO.listAllProjects();
 		return projectList;
 	}
 

@@ -27,7 +27,7 @@ public class StubEmployeeRepositoryImpl implements EmployeeRepository {
 	// Tip: create member variables in this class that will contain the objects
 	// passed by the Spring framework so that other methods can access the
 	// objects.
-
+//TODO delete all System.out.println()
 	private static Logger log = Logger.getLogger(StubEmployeeRepositoryImpl.class);
 	private DataSource dataSource;
 
@@ -96,7 +96,7 @@ public class StubEmployeeRepositoryImpl implements EmployeeRepository {
 			conn = dataSource.getConnection();
 			System.out.println("conn got");
 			PreparedStatement ps = conn.prepareStatement(statement);
-			ps.setInt(1, (int) employeeID);
+			ps.setLong(1, employeeID);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				employee.setID(rs.getInt("ID"));
@@ -136,14 +136,13 @@ public class StubEmployeeRepositoryImpl implements EmployeeRepository {
 			System.out.println("conn got");
 			PreparedStatement ps = conn.prepareStatement(statement);
 			
-			ps.setInt(1, (int) projectID);
+			ps.setLong(1, projectID);
 			ResultSet rs = ps.executeQuery();
 			System.out.println("query executed");
 			while (rs.next()) {
 				Employee employee = new Employee();
 				System.out.println("result got");
 				employee.setID(rs.getInt("ID"));
-				System.out.println(rs.getInt("ID"));
 				employee.setFirstName(rs.getString("firstName"));
 				employee.setLastName(rs.getString("lastName"));
 				employee.setMiddleInitial(rs.getString("middleInitial"));
