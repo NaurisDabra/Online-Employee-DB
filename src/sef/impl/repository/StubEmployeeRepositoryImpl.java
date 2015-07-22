@@ -54,10 +54,11 @@ public class StubEmployeeRepositoryImpl implements EmployeeRepository {
 				ps.setString(2, "%" + lastName + "%");
 			else
 				ps.setString(2, lastName);
-			Employee employee = new Employee();
+			
 			ResultSet rs = ps.executeQuery();
 			System.out.println("query executed");
 			while (rs.next()) {
+				Employee employee = new Employee();
 				System.out.println("result got");
 				employee.setID(rs.getInt("ID"));
 				employee.setFirstName(rs.getString("firstName"));
@@ -126,6 +127,44 @@ public class StubEmployeeRepositoryImpl implements EmployeeRepository {
 	public List<Employee> findEmployeesByProject(long projectID) {
 
 		List<Employee> list = new ArrayList<Employee>();
+		String statement = "Select a.ID, a.firstName, a.lastName, a.middleInitial, a.level, a.workforce, a.enterpriseID from employee a, employeeProjectDetail b where a.ID=b.employeeDetail_employee_ID and b.project_ID=?;";
+		System.out.println("statement");
+		Connection conn = null;
+		try {
+			System.out.println("conn start");
+			conn = dataSource.getConnection();
+			System.out.println("conn got");
+			PreparedStatement ps = conn.prepareStatement(statement);
+			
+			ps.setInt(1, (int) projectID);
+			ResultSet rs = ps.executeQuery();
+			System.out.println("query executed");
+			while (rs.next()) {
+				Employee employee = new Employee();
+				System.out.println("result got");
+				employee.setID(rs.getInt("ID"));
+				System.out.println(rs.getInt("ID"));
+				employee.setFirstName(rs.getString("firstName"));
+				employee.setLastName(rs.getString("lastName"));
+				employee.setMiddleInitial(rs.getString("middleInitial"));
+				employee.setLevel(rs.getString("level"));
+				employee.setWorkForce(rs.getString("workforce"));
+				employee.setEnterpriseID(rs.getString("enterpriseID"));
+				list.add(employee);
+			}
+			rs.close();
+			ps.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+		
 		return list;
 	}
 

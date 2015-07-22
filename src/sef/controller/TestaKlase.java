@@ -16,14 +16,18 @@ public class TestaKlase {
 
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("classpath:repository-config.xml");
-		EmployeeRepository customerDAO = (EmployeeRepository ) context.getBean("employeeRep");
-        
-        List<Employee> customer1 = customerDAO.findEmployeesByName("N", "");
-        for(int i=0; i<customer1.size();i++)
-        System.out.println(customer1.get(i).getFirstName());
-        System.out.println("done");
-        Employee employee=customerDAO.findEmployeeByID(1);
-        System.out.println(employee.getLastName());
+		EmployeeRepository customerDAO = (EmployeeRepository) context.getBean("employeeRep");
+
+		List<Employee> customer1 = customerDAO.findEmployeesByName("N", "");
+		System.out.println(customer1.toString());
+		for (int i = 0; i < customer1.size(); i++)
+			System.out.println(customer1.get(i).getFirstName());
+		System.out.println("done");
+		Employee employee = customerDAO.findEmployeeByID(1);
+		System.out.println(employee.getLastName());
+		customer1 = customerDAO.findEmployeesByProject(2);
+		for (int i = 0; i < customer1.size(); i++)
+			System.out.println(customer1.get(i).getFirstName());
 	}
 
 }
