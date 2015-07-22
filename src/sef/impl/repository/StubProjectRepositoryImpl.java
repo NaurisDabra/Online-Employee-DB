@@ -167,16 +167,7 @@ public class StubProjectRepositoryImpl implements ProjectRepository {
 				ps2.setLong(1, newproject.getID());
 				ResultSet rs2 = ps2.executeQuery();
 				getProjectRoleList(rs2,rolelist);
-				System.out.println(3);
-				while(rs2.next()){
-					ProjectRole newrole=new ProjectRole();
-					newrole.setID(rs2.getLong("ID"));
-					newrole.setRole(rs2.getString("role"));
-					newrole.setStartDate(rs2.getDate("startDate"));
-					newrole.setEndDate(rs2.getDate("endDate"));
-					rolelist.add(newrole);		
-					System.out.println(rs2.getLong("ID"));
-				}
+
 				project.setProject(newproject);
 				project.setProjectRoles(rolelist);
 
