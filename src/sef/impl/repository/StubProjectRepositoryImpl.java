@@ -183,18 +183,20 @@ public class StubProjectRepositoryImpl implements ProjectRepository {
 					newproject.setDescription(rs.getString("description"));
 					newproject.setClient(rs.getString("client"));			
 					
-				String statement="Select a.ID,a.role,a.startDate,a.endDate from projectrole a,employeeprojectdetail b where a.employeeprojectdetail_ID=b.ID and b.employeeDetail_employee_ID=?;";
+				String statement="Select a.ID,a.role,a.startDate,a.endDate from projectrole a,employeeprojectdetail b where a.employeeprojectdetail_ID=b.ID and b.project_ID=? and b.employeeDetail_employee_ID=?;";
 				PreparedStatement ps2 = conn.prepareStatement(statement);
-				ps2.setLong(1, employeeID);
+				ps2.setLong(2, employeeID);
+				ps2.setLong(1, newproject.getID());
 				ResultSet rs2 = ps2.executeQuery();
-
+				System.out.println(3);
 				while(rs2.next()){
 					ProjectRole newrole=new ProjectRole();
 					newrole.setID(rs2.getLong("ID"));
 					newrole.setRole(rs2.getString("role"));
 					newrole.setStartDate(rs2.getDate("startDate"));
 					newrole.setEndDate(rs2.getDate("endDate"));
-					rolelist.add(newrole);								
+					rolelist.add(newrole);		
+					System.out.println(rs2.getLong("ID"));
 				}
 				project.setProject(newproject);
 				project.setProjectRoles(rolelist);
