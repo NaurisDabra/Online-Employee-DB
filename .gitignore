@@ -45,3 +45,4 @@ src/sef/controller/TestaKlase.java
 build/classes/sef/impl/service/StubSearchServiceImpl.class
 build/classes/sef/impl/repository/StubProjectRepositoryImpl.class
 *.class
+*.class
