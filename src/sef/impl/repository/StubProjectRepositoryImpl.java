@@ -13,7 +13,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.sql.DataSource;
 
 
 import org.apache.log4j.Logger;
@@ -50,16 +49,9 @@ public class StubProjectRepositoryImpl implements ProjectRepository {
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()){
-				Project project=new Project();
-				project.setID(rs.getLong("ID"));
-				project.setName(rs.getString("Name"));
-				project.setDescription(rs.getString("Description"));
-				project.setClient(rs.getString("Client"));
-				list.add(project);								
-			}
-			rs.close();
+			getProjectList(rs,list);
 			ps.close();
+			rs.close();
  
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -76,6 +68,7 @@ public class StubProjectRepositoryImpl implements ProjectRepository {
 		return list;
 	}
 	
+		
 	@Override
 	public List<Project> getEmployeeProjects(long employeeID) {
 		
@@ -89,15 +82,7 @@ public class StubProjectRepositoryImpl implements ProjectRepository {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setLong(1, employeeID);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()){
-				Project project=new Project();
-				project.setID(rs.getLong("ID"));
-				project.setName(rs.getString("name"));
-				project.setDescription(rs.getString("description"));
-				project.setClient(rs.getString("client"));
-				list.add(project);								
-			}
-			rs.close();
+			getProjectList(rs,list);
 			ps.close();
  
 		} catch (SQLException e) {
@@ -131,15 +116,7 @@ public class StubProjectRepositoryImpl implements ProjectRepository {
 			ps.setLong(1, employeeID);
 			ps.setLong(2, projectID);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()){
-				ProjectRole project=new ProjectRole();
-				project.setID(rs.getLong("ID"));
-				project.setRole(rs.getString("role"));
-				project.setStartDate(rs.getDate("startDate"));
-				project.setEndDate(rs.getDate("endDate"));
-				list.add(project);								
-			}
-			rs.close();
+			getProjectRoleList(rs,list);
 			ps.close();
  
 		} catch (SQLException e) {
@@ -187,15 +164,7 @@ public class StubProjectRepositoryImpl implements ProjectRepository {
 				PreparedStatement ps2 = conn.prepareStatement(statement);
 				ps2.setLong(1, employeeID);
 				ResultSet rs2 = ps2.executeQuery();
-
-				while(rs2.next()){
-					ProjectRole newrole=new ProjectRole();
-					newrole.setID(rs2.getLong("ID"));
-					newrole.setRole(rs2.getString("role"));
-					newrole.setStartDate(rs2.getDate("startDate"));
-					newrole.setEndDate(rs2.getDate("endDate"));
-					rolelist.add(newrole);								
-				}
+				getProjectRoleList(rs2,rolelist);
 				project.setProject(newproject);
 				project.setProjectRoles(rolelist);
 
@@ -219,7 +188,31 @@ public class StubProjectRepositoryImpl implements ProjectRepository {
 		
 		return detailList;
 	}
-
+	private List<Project> getProjectList(ResultSet rs,List<Project> list) throws SQLException{
+		while(rs.next()){
+			Project project=new Project();
+			project.setID(rs.getLong("ID"));
+			project.setName(rs.getString("Name"));
+			project.setDescription(rs.getString("Description"));
+			project.setClient(rs.getString("Client"));
+			list.add(project);		
+		}
+		rs.close();
+		return list;
+	}
+	
+	private List<ProjectRole> getProjectRoleList(ResultSet rs,List<ProjectRole> list) throws SQLException{
+		while(rs.next()){
+			ProjectRole newrole=new ProjectRole();
+			newrole.setID(rs.getLong("ID"));
+			newrole.setRole(rs.getString("role"));
+			newrole.setStartDate(rs.getDate("startDate"));
+			newrole.setEndDate(rs.getDate("endDate"));
+			list.add(newrole);								
+		}
+		rs.close();
+		return list;
+	}
 
 
 	
