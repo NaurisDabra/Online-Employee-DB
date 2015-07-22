@@ -1,0 +1,5 @@
+Insert into project(name, description, client) values("RTU session planner","Plans sessions for RTU", "RTU")
+Insert into project(name, description, client) values("Carpark website","Website for selling cars", "Autoplacis")
+Insert into project(name, description, client) values("Tofu website","Website for Tofu restauran", "Tofu")
+Insert into project(name, description, client) values("VQuest","Android app for challenges", "RTU business incubator")
+Insert into project(name, description, client) values("MeasureLand","Android app for measuring land", "LU")
