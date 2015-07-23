@@ -111,8 +111,8 @@ INSERT INTO projectrole (ID, role, startDate, endDate, employeeprojectdetail_ID)
 (3, 'Founder', '2014/01/13', '2014/06/12', 6),
 (4, 'Social media manager', '2015/03/21', '2015/07/08', 3),
 (5, 'PR specialist', '2012/03/28', '2015/01/12', 3),
-(6, 'Food supply specialist', '2010/06/10', '2015/06/10', 1)
-(7, 'Junior developer', '2009/05/14', '2015/02/24', 5),
+(6, 'Food supply specialist', '2010/06/10', '2015/06/10', 1),
+(7, 'Junior developer', '2009/05/14', '2015/02/24', 8),
 (8, 'Senior project manager', '2015/02/10/', '2015/05/23', 8),
 (9, 'QA specialist', '2010/05/22', '2015/01/12', 8);
 
@@ -131,5 +131,5 @@ CREATE TABLE `employeeskill` (
 
 INSERT INTO employeeskill (ID, name, description, rating, employeeDetail_ID, employeeDetail_employee_ID) VALUES
 (1, 'Java development', 'Can be included in any Java project', 10, 1,9),
-(2, 'Social media management', 'Properly manages company image in social media', 8, 21, 1);
+(2, 'Social media management', 'Manages company image in social media', 8, 21, 1);
 
