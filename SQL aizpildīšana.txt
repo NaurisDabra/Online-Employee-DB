@@ -1,0 +1,136 @@
+CREATE TABLE employee (
+  ID int(11) NOT NULL PRIMARY KEY,
+  firstName varchar(45) NOT NULL,
+  lastName varchar(45) NOT NULL,
+  middleInit varchar(45) NOT NULL,
+  level varchar(45) NOT NULL,
+  workforce varchar(45) NOT NULL,
+  enterpriseID varchar(45) NOT NULL
+);
+
+INSERT INTO `employee` (`ID`, `firstName`, `lastName`, `middleInit`, `level`, `workforce`, `enterpriseID`) VALUES
+(1, 'Ruzwana','Bashir','A','CEO','Strategic management','Peek'),
+(2, 'Samantha','John','B','Developer','Software development','Pivotal labs'),
+(3, 'Callie','Schweitzer','C','Director','Marketing and communications','Vox Media'),
+(4, 'Stasy-Marie','Ishmael','D','Manager','Product management','Percolate'),
+(5, 'Morgan','Missen','E','Consultant','In-house consulting','Google'),
+(6, 'Soraya','Darabi','F','Co-founder','Strategic management','Zady'),
+(7, 'John','Chambers','G','CEO','Board of directors','Cisco'),
+(8, 'Julia','Kaganskiy','H','Editor-at-Large','Media management','The Creators Project'),
+(9, 'Courtney','Myers','B','Founder','Board of directors','Stealth startup'),
+(10, 'Natalia','Noguera','O','CEO','Board of directors','The Pipeline Fellowship');
+
+
+CREATE TABLE project (
+  ID int(11) NOT NULL,
+  name varchar(45) NOT NULL,
+  description varchar(45) NOT NULL,
+  client varchar(45) NOT NULL,
+  PRIMARY KEY (ID),
+  UNIQUE KEY name_UNIQUE(name)
+);
+
+INSERT INTO `project` (`ID`, `name`, `description`, `client`) VALUES
+(1,'Inclusion of Youtube into Google','All necessary preparation for this event','Google'),
+(2,'RTU session planner','Useful for time management during RTU exams','RTU'),
+(3,'Mobile website','Mobile website for Refinery29','Refinery29'),
+(4,'Positioning of The New York Time','Social media management for this company','The New York Time'),
+(5,'Carpark website','Website for selling cars','Autoplacis'),
+(6,'Tofu website','Website for Tofu restauran','Tofu'),
+(7,'VQuest','Android app for challenges','RTU business incubator'),
+(8,'MeasureLand','Android app for measuring land','LU');
+
+CREATE TABLE employeedetail (
+  `ID` int(11) NOT NULL,
+  `employee_ID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`,`employee_ID`),
+  UNIQUE KEY `ID_UNIQUE` (`ID`),
+  FOREIGN KEY (`employee_ID`) REFERENCES `employee` (`ID`)
+);
+
+INSERT INTO `employeedetail` (`ID`, `employee_ID`) VALUES
+(1,9),
+(2,9),
+(3,2),
+(4,2),
+(5,7),
+(6,8),
+(7,1),
+(8,7),
+(9,10),
+(10,5),
+(11,9),
+(12,2),
+(13,9),
+(14,3),
+(15,5),
+(16,9),
+(17,9),
+(18,7),
+(19,2),
+(20,7),
+(21,1);
+
+
+CREATE TABLE `employeeprojectdetail` (
+  `ID` int(11) NOT NULL,
+  `project_ID` int(11) NOT NULL,
+  `employeeDetail_ID` int(11) NOT NULL,
+  `employeeDetail_employee_ID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`,`project_ID`,`employeeDetail_ID`,`employeeDetail_employee_ID`),
+  FOREIGN KEY (`employeeDetail_ID`, `employeeDetail_employee_ID`) REFERENCES `employeedetail` (`ID`, `employee_ID`),
+  FOREIGN KEY (`project_ID`) REFERENCES `project` (`ID`)
+);
+
+INSERT INTO `employeeprojectdetail` (`ID`, `project_ID`, `employeeDetail_ID`, `employeeDetail_employee_ID`) VALUES
+(1,8,3,2),
+(2,4,8,7),
+(3,6,6,8),
+(4,2,9,10),
+(5,2,5,7),
+(6,5,11,9),
+(7,6,14,3),
+(8,2,18,7),
+(9,8,18,7),
+(10,7,11,9);
+
+
+CREATE TABLE `projectrole` (
+  `ID` int(11) NOT NULL,
+  `role` varchar(45) NOT NULL,
+  `startDate` datetime NOT NULL,
+  `endDate` datetime NOT NULL,
+  `employeeprojectdetail_ID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`,`employeeprojectdetail_ID`),
+  UNIQUE KEY (`ID`),
+  FOREIGN KEY (`employeeprojectdetail_ID`) REFERENCES `employeeprojectdetail` (`ID`)
+);
+
+INSERT INTO projectrole (ID, role, startDate, endDate, employeeprojectdetail_ID) VALUES
+(1, 'Junior programmer', 06/28/2010, 01/12/2015, 2),
+(2, 'Strategic manager',  04/27/2015, 06/24/2015, 10),
+(3, 'Founder', 01/13/2014, 06/12/2014, 6),
+(4, 'Social media manager', 03/21/2015, 07/08/2015, 3),
+(5, 'PR specialist', 03/28/2012, 01/12/2015, 3),
+(6, 'Food supply specialist', 06/10/2010, 06/10/2015, 1),
+(7, 'Junior developer', 05/14/2009, 02/24/2015, 5),
+(8, 'Senior project manager', 02/10/2015, 05/23/2015, 8),
+(9, 'QA specialist', 05/22/2010, 01/12/2015, 8);
+
+
+CREATE TABLE `employeeskill` (
+  `ID` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `description` varchar(45) NOT NULL,
+  `rating` int(11) NOT NULL,
+  `employeeDetail_ID` int(11) NOT NULL,
+  `employeeDetail_employee_ID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`,`employeeDetail_ID`,`employeeDetail_employee_ID`),
+  UNIQUE KEY `ID_UNIQUE` (`ID`),
+  FOREIGN KEY (`employeeDetail_ID`, `employeeDetail_employee_ID`) REFERENCES `employeedetail` (`ID`, `employee_ID`)
+);
+
+INSERT INTO employeeskill (ID, name, description, rating, employeeDetail_ID, employeeDetail_employee_ID) VALUES
+(1, 'Java development', 'Can be included in any Java project', 10, 1,9),
+(2, 'Social media management', 'Properly manages company image in social media', 8, 21, 1);
+
