@@ -41,18 +41,14 @@ public class StubEmployeeRepositoryImpl implements EmployeeRepository {
 		System.out.println("statement");
 		List<Employee> list = new ArrayList<Employee>();
 		Connection conn = null;
-
-		if (lastName == null)
-			lastName = "";
+		if (lastName.isEmpty())
+			lastName = "%";
 		try {
 			System.out.println("conn start");
 			conn = dataSource.getConnection();
 			System.out.println("conn got");
 			PreparedStatement ps = conn.prepareStatement(statement);
 			ps.setString(1, "%" + firstName + "%");
-			if (lastName.isEmpty())
-				ps.setString(2, "%" + lastName + "%");
-			else
 				ps.setString(2, lastName);
 			
 			ResultSet rs = ps.executeQuery();
