@@ -87,7 +87,6 @@ INSERT INTO `employeeprojectdetail` (`ID`, `project_ID`, `employeeDetail_ID`, `e
 (2,4,8,7),
 (3,6,6,8),
 (4,2,9,10),
-(5,2,5,7),
 (6,5,11,9),
 (7,6,14,3),
 (8,2,18,7),
