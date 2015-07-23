@@ -104,13 +104,14 @@ public class StubProjectRepositoryImpl implements ProjectRepository {
 	@Override
 	public List<ProjectRole> getEmployeeProjectRoles(long employeeID,
 			long projectID) {
-		
+		//TODO remove or remake because unneeded
 		List<ProjectRole> list = new ArrayList<ProjectRole>();
-		
+		/*
 		String sql = "Select a.ID, a.role, a.startDate, a.endDate from projectrole a, employeeProjectDetail b where a.ID=b.employeeDetail_ID and b.employeeDetail_employee_ID=? and b.project_ID=?;";
 		Connection conn = null;
  
 		try {
+			System.out.println("was called");
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setLong(1, employeeID);
@@ -131,7 +132,7 @@ public class StubProjectRepositoryImpl implements ProjectRepository {
 			}
 		}
 		
-		
+		*/
 		return list;
 	}
 		
@@ -171,7 +172,9 @@ public class StubProjectRepositoryImpl implements ProjectRepository {
 				project.setProject(newproject);
 				project.setProjectRoles(rolelist);
 
-				detailList.add(project);								
+				detailList.add(project);		
+				ps2.close();
+				rs2.close();
 			}
 			
 			rs.close();
@@ -200,7 +203,6 @@ public class StubProjectRepositoryImpl implements ProjectRepository {
 			project.setClient(rs.getString("Client"));
 			list.add(project);		
 		}
-		rs.close();
 		return list;
 	}
 	
