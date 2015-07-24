@@ -24,7 +24,6 @@ public class StubProjectRepositoryImplTest extends TestCase {
 	}
 
 	public void testStubProjectRepositoryImpl() {
-		assertEquals(1,1);
 	}
 
 	public void testListAllProjects() {

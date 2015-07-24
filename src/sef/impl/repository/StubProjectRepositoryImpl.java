@@ -101,21 +101,20 @@ public class StubProjectRepositoryImpl implements ProjectRepository {
 	}
 	
 	
-	@Override
 	public List<ProjectRole> getEmployeeProjectRoles(long employeeID,
 			long projectID) {
 		//TODO remove or remake because unneeded
 		List<ProjectRole> list = new ArrayList<ProjectRole>();
-		/*
-		String sql = "Select a.ID, a.role, a.startDate, a.endDate from projectrole a, employeeProjectDetail b where a.ID=b.employeeDetail_ID and b.employeeDetail_employee_ID=? and b.project_ID=?;";
+		
+		String statement="Select a.ID,a.role,a.startDate,a.endDate from projectrole a,employeeprojectdetail b where a.employeeprojectdetail_ID=b.ID and b.project_ID=? and b.employeeDetail_employee_ID=?;";
 		Connection conn = null;
  
 		try {
 			System.out.println("was called");
 			conn = dataSource.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setLong(1, employeeID);
-			ps.setLong(2, projectID);
+			PreparedStatement ps = conn.prepareStatement(statement);
+			ps.setLong(2, employeeID);
+			ps.setLong(1, projectID);
 			ResultSet rs = ps.executeQuery();
 			getProjectRoleList(rs,list);
 			rs.close();
@@ -132,7 +131,7 @@ public class StubProjectRepositoryImpl implements ProjectRepository {
 			}
 		}
 		
-		*/
+		
 		return list;
 	}
 		
@@ -162,19 +161,15 @@ public class StubProjectRepositoryImpl implements ProjectRepository {
 					newproject.setDescription(rs.getString("description"));
 					newproject.setClient(rs.getString("client"));			
 					
-				String statement="Select a.ID,a.role,a.startDate,a.endDate from projectrole a,employeeprojectdetail b where a.employeeprojectdetail_ID=b.ID and b.project_ID=? and b.employeeDetail_employee_ID=?;";
-				PreparedStatement ps2 = conn.prepareStatement(statement);
-				ps2.setLong(2, employeeID);
-				ps2.setLong(1, newproject.getID());
-				ResultSet rs2 = ps2.executeQuery();
-				getProjectRoleList(rs2,rolelist);
-
+					
+				
+				
+				rolelist=getEmployeeProjectRoles(employeeID,  newproject.getID());
 				project.setProject(newproject);
 				project.setProjectRoles(rolelist);
 
 				detailList.add(project);		
-				ps2.close();
-				rs2.close();
+
 			}
 			
 			rs.close();
