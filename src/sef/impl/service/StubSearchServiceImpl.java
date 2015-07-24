@@ -40,7 +40,7 @@ public class StubSearchServiceImpl implements SearchService {
 		employeeList = empDAO.findEmployeesByProject(projectID);
 		return employeeList;
 	}
-
+ 
 	@Override
 	public List<Project> listAllProjects() {
 		

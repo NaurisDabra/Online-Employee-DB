@@ -40,9 +40,9 @@ public class testStubSkillRepositoryImpl extends TestCase {
 		assertEquals(list.get(0).getName(), "Java development");
 		assertEquals(list.get(0).getDescription(), "Can be included in any Java project");
 		
-		list = service.findEmployeeSkills(-1);
+		list = service.findEmployeeSkills(1);
 		
-		assertTrue(list.isEmpty());
+		assertEquals(list.get(0).getName(), "Social media management");
 		
 		
 		
