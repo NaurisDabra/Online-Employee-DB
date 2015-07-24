@@ -18,7 +18,7 @@ public class SearchEmployeeTest extends TestCase{
 	}
 	
 	public void testListemployees(){
-		List result = service.findEmployeesByName("Eugene", "Lozada");
+		List result = service.findEmployeesByName("", "");
 		assertNotNull(result);
 		assertTrue(result.size() > 0);
 	}

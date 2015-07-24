@@ -1,9 +1,12 @@
 package sef.impl.repository.test;
 
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import junit.framework.TestCase;
+import sef.domain.Project;
 import sef.interfaces.repository.ProjectRepository;
 import sef.interfaces.service.SearchService;
 
@@ -27,7 +30,11 @@ public class StubProjectRepositoryImplTest extends TestCase {
 	}
 
 	public void testListAllProjects() {
-		assertEquals(8, projectRep.listAllProjects().size());
+		List<Project> pr= projectRep.listAllProjects();
+		assertEquals(8, pr.size());
+		assertEquals("VQuest", pr.get(6).getName());
+		
+		
 	}
 
 	public void testGetEmployeeProjects() {
