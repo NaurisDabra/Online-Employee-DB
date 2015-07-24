@@ -1,4 +1,4 @@
-package sef.test.service;
+package sef.impl.service.test;
 
 import java.util.List;
 

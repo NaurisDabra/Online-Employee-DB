@@ -47,7 +47,7 @@ public class testStubEmployeeDetailsServiceImpl extends TestCase {
 		EmployeeDetail detail = service.getEmployeeDetails(7);
 		assertFalse(detail.getEmployee().getFirstName().isEmpty());
 		assertTrue(detail.getSkillList().isEmpty());
-		assertEquals(2,detail.getProjectList().size());
+		assertEquals(3,detail.getProjectList().size());
 		
 	
 		
