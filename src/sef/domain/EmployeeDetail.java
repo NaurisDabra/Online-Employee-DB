@@ -2,6 +2,11 @@ package sef.domain;
 
 import java.util.List;
 
+/**
+ * 
+ * @author Student
+ *
+ */
 public class EmployeeDetail {
 
 	private Employee employee;

@@ -10,9 +10,9 @@ import org.apache.log4j.Logger;
 
 public class StubEmployeeDetailsServiceImpl implements EmployeeDetailsService{
 	
-	//Tip: create member variables in this class that will contain the objects 
-	//passed by the Spring framework so that other methods can access the objects.
-
+	/**Tip: create member variables in this class that will contain the objects 
+	passed by the Spring framework so that other methods can access the objects.
+*/
 	private static Logger log = Logger.getLogger(StubEmployeeDetailsServiceImpl.class);
 	private EmployeeRepository empDAO;
 	private SkillRepository skillDAO;

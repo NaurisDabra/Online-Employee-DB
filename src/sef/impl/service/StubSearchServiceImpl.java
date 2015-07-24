@@ -13,9 +13,9 @@ import org.apache.log4j.Logger;
 
 public class StubSearchServiceImpl implements SearchService {
 
-	//Tip: create member variables in this class that will contain the objects 
-	//passed by the Spring framework so that other methods can access the objects.
-
+	/**Tip: create member variables in this class that will contain the objects 
+	passed by the Spring framework so that other methods can access the objects.
+*/
 	private static Logger log = Logger.getLogger(StubSearchServiceImpl.class);
 	private EmployeeRepository empDAO;
 	private ProjectRepository projectDAO;
