@@ -23,7 +23,6 @@ public interface SearchService {
 	 * @param lastName String representing the last name of the employee
 	 * @return the list of employees 
 	 */	
-	public List<Employee> findEmployeesByName(String firstName, String lastName);
 	
 	/**
 	 * Retrieves all projects from the database.  
@@ -32,5 +31,7 @@ public interface SearchService {
 	 * @return list of projects from the database
 	 */
 	public List<Project> listAllProjects();
+
+	public List<Employee> findEmployeesByName(String string, String string2);
 	
 }
