@@ -65,7 +65,7 @@ public class testSearchService extends TestCase {
         assertNotNull(result);
         assertEquals(result.size(), 1);
         assertTrue(result.get(0).getFirstName().equals("Ruzwana"));
-        assertTrue(result.get(0).getFirstName().equals("Bashir"));
+        assertTrue(result.get(0).getLastName().equals("Bashir"));
 
 	}
 	
