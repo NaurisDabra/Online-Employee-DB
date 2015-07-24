@@ -2,6 +2,7 @@ package sef.test.service;
 
 import java.util.List;
 
+import sef.domain.Employee;
 import sef.interfaces.service.SearchService;
 import junit.framework.TestCase;
 
@@ -22,4 +23,25 @@ public class SearchEmployeeTest extends TestCase{
 		assertNotNull(result);
 		assertTrue(result.size() > 0);
 	}
+	
+	
+	// pievienoja Andris
+	
+	public void testfindEmployeesByProject() {
+		
+		List result = service.findEmployeesByProject(0);		
+		
+	}
+	
+	
+	public void testListAllProjects() {
+		
+		
+		
+	}
+	
+	
+	
+	
+	
 }
